@@ -7,6 +7,7 @@ interface TodoInputProps {
 
 const TodoInput: React.FC<TodoInputProps> = ({ onAddTask }) => {
   const [input, setInput] = useState<string>("");
+  const [todos, setTodos] = useState<string[]>([]);
 
   const handleInputChange = (e: any) => {
     setInput(e.target.value);
@@ -14,9 +15,11 @@ const TodoInput: React.FC<TodoInputProps> = ({ onAddTask }) => {
 
   const handleSubmission = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("form has been submitted");
+    if (input.trim() !== "") {
+      setTodos([...todos, input]);
+      setInput("");
+    }
   };
-
   return (
     <form onSubmit={handleSubmission}>
       <div>
