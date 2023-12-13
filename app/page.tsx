@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 import { ITask } from "./interface";
-import TodoTask from "./components/TodoTask";
-import TodoInput from "./components/TodoInput";
-import TodoList from "./components/TodoList";
+import { TodoInput } from "./components/TodoInput";
+import { TodoList } from "./components/TodoList";
+import { Toaster } from "react-hot-toast";
 
 export default function Home() {
   return (

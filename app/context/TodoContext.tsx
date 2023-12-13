@@ -1,3 +1,4 @@
+"use client";
 import React, { createContext, useState } from "react";
 
 interface TodoContextProps {
@@ -22,8 +23,6 @@ export const TodoProvider = (props: { children: React.ReactNode }) => {
   };
 
   return (
-    <TodoContext.Provider value={undefined}>
-      {props.children}
-    </TodoContext.Provider>
+    <TodoContext.Provider value={value}>{props.children}</TodoContext.Provider>
   );
 };

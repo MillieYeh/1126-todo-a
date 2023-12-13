@@ -1,41 +1,47 @@
-import React, { useState } from "react";
-import { ITask } from "../interface";
+import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
+import { useTodo } from "../context/useTodo";
+import { Input } from "./input";
 
-interface TodoInputProps {
-  onAddTask: (taskName: string) => void;
-}
-
-const TodoInput: React.FC<TodoInputProps> = ({ onAddTask }) => {
+export const TodoInput = () => {
   const [input, setInput] = useState<string>("");
-  const [todos, setTodos] = useState<string[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { addTodo } = useTodo();
 
-  const handleInputChange = (e: any) => {
-    setInput(e.target.value);
-  };
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const handleSubmission = (e: React.FormEvent) => {
     e.preventDefault();
     if (input.trim() !== "") {
-      setTodos([...todos, input]);
+      addTodo(input);
       setInput("");
+      toast.success("Todo added successfully!");
+    } else {
+      toast.error("Todo field cannot be empty!");
     }
   };
+
   return (
     <form onSubmit={handleSubmission}>
-      <div>
-        <input
-          className='border border-gray-400 mr-2 px-4 py-2 flex-grow'
+      <div className='flex items-center w-full max-w-lg gap-2 p-5 m-auto'>
+        <Input
+          ref={inputRef}
           type='text'
-          placeholder=''
+          placeholder='start typing ...'
           value={input}
-          onChange={handleInputChange}
+          onChange={(e) => setInput(e.target.value)}
         />
-        <button className='btn' type='submit'>
-          Add Task
+        <button
+          type='submit'
+          className='px-5 py-2 text-sm font-normal text-blue-300 bg-blue-900 border-2 border-blue-900 active:scale-95 rounded-xl'
+        >
+          Submit
         </button>
       </div>
     </form>
   );
 };
-
-export default TodoInput;
