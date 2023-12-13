@@ -1,4 +1,5 @@
-export interface ITask {
-    id: string;
-    taskName : string;
-}
+interface Todo {
+    id: string
+    text: string
+    status: 'undone' | 'completed'
+  }

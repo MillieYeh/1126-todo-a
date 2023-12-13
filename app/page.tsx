@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { ITask } from "./interface";
 import { TodoInput } from "./components/TodoInput";
 import { TodoList } from "./components/TodoList";
 import { Toaster } from "react-hot-toast";
