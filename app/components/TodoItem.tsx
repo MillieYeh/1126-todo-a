@@ -30,6 +30,17 @@ const TodoItem = (props: { todo: Todo }) => {
     }
   };
 
+  const handleUpdate = (todoId: string) => {
+    if (editingTodoText.trim() !== "") {
+      editTodo(todoId, editingTodoText);
+      setEditingTodoId(null);
+      setEditingTodoText("");
+      toast.success("Todo updated successfully!");
+    } else {
+      toast.error("Todo field cannot be empty!");
+    }
+  };
+
   const handleDelete = (todoId: string) => {
     deleteTodo(todoId);
     toast.success("Todo deleted successfully!");
@@ -50,6 +61,12 @@ const TodoItem = (props: { todo: Todo }) => {
             value={editingTodoText}
             onChange={(e) => setEditingTodoText(e.target.value)}
           />
+          <button
+            className='px-5 py-2 text-sm font-normal text-orange-300 bg-orange-900 border-2 border-orange-900 active:scale-95 rounded-xl'
+            onClick={() => handleUpdate(todo.id)}
+          >
+            Update
+          </button>
         </motion.div>
       ) : (
         <div className='flex flex-col gap-5'>
