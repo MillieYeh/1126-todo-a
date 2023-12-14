@@ -6,6 +6,7 @@ interface TodoContextProps {
   todos: Todo[];
   addTodo: (text: string) => void;
   deleteTodo: (id: string) => void;
+  editTodo: (id: string, text: string) => void;
 }
 
 export interface Todo {
@@ -34,10 +35,22 @@ export const TodoProvider = (props: { children: React.ReactNode }) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
+  const editTodo = (id: string, text: string) => {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, text };
+        }
+        return todo;
+      });
+    });
+  };
+
   const value: TodoContextProps = {
     todos,
     addTodo,
     deleteTodo,
+    editTodo,
   };
 
   return (
