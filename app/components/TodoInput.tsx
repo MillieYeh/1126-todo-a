@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTodo } from "../context/useTodo";
-import { Input } from "./input";
+import { Input } from "./Input";
 
 export const TodoInput = () => {
   const [input, setInput] = useState<string>("");

@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 interface TodoContextProps {
   todos: Todo[];
   addTodo: (text: string) => void;
+  deleteTodo: (id: string) => void;
 }
 
 export interface Todo {
@@ -29,9 +30,14 @@ export const TodoProvider = (props: { children: React.ReactNode }) => {
     setTodos([...todos, newTodo]);
   };
 
+  const deleteTodo = (id: string) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  };
+
   const value: TodoContextProps = {
     todos,
     addTodo,
+    deleteTodo,
   };
 
   return (
